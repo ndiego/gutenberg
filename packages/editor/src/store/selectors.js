@@ -334,8 +334,8 @@ export function getAutosaveAttribute( state, attributeName ) {
 		plugin: 'Gutenberg',
 	} );
 
-	const postId = getCurrentPostId( state );
-	return select( 'core' ).getAutosaveAttribute( postId, attributeName );
+	const currentPost = getCurrentPost( state );
+	return select( 'core' ).getAutosaveAttribute( currentPost, attributeName );
 }
 
 /**
@@ -541,8 +541,8 @@ export function getAutosave( state ) {
 		plugin: 'Gutenberg',
 	} );
 
-	const postId = getCurrentPostId( state );
-	return select( 'core' ).getAutosave( postId );
+	const currentPost = getCurrentPost( state );
+	return select( 'core' ).getAutosave( currentPost );
 }
 
 /**
@@ -558,8 +558,8 @@ export function hasAutosave( state ) {
 		plugin: 'Gutenberg',
 	} );
 
-	const postId = getCurrentPostId( state );
-	return select( 'core' ).hasAutosave( postId );
+	const currentPost = getCurrentPost( state );
+	return select( 'core' ).hasAutosave( currentPost );
 }
 
 /**

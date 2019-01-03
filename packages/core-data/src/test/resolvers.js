@@ -77,7 +77,7 @@ describe( 'getAutosave', () => {
 	} ];
 
 	it( 'yields with fetched autosave post', async () => {
-		const fulfillment = getAutosave( 1 );
+		const fulfillment = getAutosave( { id: 1, type: 'post' } );
 		// Trigger generator
 		fulfillment.next();
 		// Provide apiFetch response and trigger Action
@@ -86,7 +86,7 @@ describe( 'getAutosave', () => {
 	} );
 
 	it( 'yields undefined if no autosave existings for the post', async () => {
-		const fulfillment = getAutosave( 1 );
+		const fulfillment = getAutosave( { id: 1, type: 'post' } );
 		// Trigger generator
 		fulfillment.next();
 		// Provide apiFetch response and trigger Action

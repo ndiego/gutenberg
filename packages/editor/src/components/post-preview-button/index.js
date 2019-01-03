@@ -194,7 +194,7 @@ export class PostPreviewButton extends Component {
 export default compose( [
 	withSelect( ( select, { forcePreviewLink, forceIsAutosaveable } ) => {
 		const {
-			getCurrentPostId,
+			getCurrentPost,
 			getCurrentPostAttribute,
 			getEditedPostAttribute,
 			isEditedPostSaveable,
@@ -208,11 +208,11 @@ export default compose( [
 
 		const previewLink = getEditedPostPreviewLink();
 		const postType = getPostType( getEditedPostAttribute( 'type' ) );
-		const postId = getCurrentPostId();
-		const autosave = getAutosave( postId );
+		const post = getCurrentPost();
+		const autosave = getAutosave( post );
 
 		return {
-			postId,
+			postId: post.id,
 			autosave,
 			currentPostLink: getCurrentPostAttribute( 'link' ),
 			previewLink: forcePreviewLink !== undefined ? forcePreviewLink : previewLink,
