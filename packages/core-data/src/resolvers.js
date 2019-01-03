@@ -126,14 +126,13 @@ export function* hasUploadPermissions() {
  * @param {Object} post The post that is the parent of the autosave
  */
 export function* getAutosave( post ) {
-	const {
-		id,
-		type,
-	} = post;
+	const { id, type } = post;
 
-	const postTypePathPart = type === 'post' ? 'posts' : type;
+	const postTypeEntities = yield getKindEntities( 'postType' );
+	const entity = find( postTypeEntities, { name: type } );
+	const { baseURL } = entity;
 
-	const autosaveResponse = yield apiFetch( { path: `/wp/v2/${ postTypePathPart }/${ id }/autosaves?context=edit` } );
+	const autosaveResponse = yield apiFetch( { path: `${ baseURL }/${ id }/autosaves?context=edit` } );
 	if ( autosaveResponse && autosaveResponse[ 0 ] ) {
 		yield resetAutosave( id, autosaveResponse[ 0 ] );
 	}

@@ -77,18 +77,30 @@ describe( 'getAutosave', () => {
 	} ];
 
 	it( 'yields with fetched autosave post', async () => {
+		const entities = [ { name: 'post', kind: 'postType', baseURL: '/wp/v2/post' } ];
 		const fulfillment = getAutosave( { id: 1, type: 'post' } );
+
 		// Trigger generator
 		fulfillment.next();
+
+		// Trigger generator with entities
+		fulfillment.next( entities );
+
 		// Provide apiFetch response and trigger Action
 		const received = ( await fulfillment.next( SUCCESSFUL_RESPONSE ) ).value;
 		expect( received ).toEqual( resetAutosave( 1, SUCCESSFUL_RESPONSE[ 0 ] ) );
 	} );
 
 	it( 'yields undefined if no autosave existings for the post', async () => {
+		const entities = [ { name: 'post', kind: 'postType', baseURL: '/wp/v2/post' } ];
 		const fulfillment = getAutosave( { id: 1, type: 'post' } );
+
 		// Trigger generator
 		fulfillment.next();
+
+		// Trigger generator with entities
+		fulfillment.next( entities );
+
 		// Provide apiFetch response and trigger Action
 		const received = ( await fulfillment.next( [] ) ).value;
 		expect( received ).toBeUndefined();
